@@ -1,0 +1,38 @@
+### Implementing and simulating multiplexers in PyRTL ###
+
+import pyrtl
+
+# Now, it is time to build and simulate (for 16 cycles) a 3-bit 5:1 MUX.
+# You can develop your design using either Boolean gates as above or PyRTL's
+# conditional assignment.
+
+# Declare data inputs
+# < add your code here >
+
+a = pyrtl.Input(bitwidth=1, name='a')
+b = pyrtl.Input(bitwidth=1, name='b')
+c = pyrtl.Input(bitwidth=1, name='c')
+d = pyrtl.Input(bitwidth=1, name='d')
+e = pyrtl.Input(bitwidth=1, name='e')
+
+# Declare control inputs
+# < add your code here >
+
+s0 = pyrtl.Input(bitwidth=3, name='s0')
+#s1 = pyrtl.Input(bitwidth=1, name='s1')
+#s2 = pyrtl.Input(bitwidth=1, name='s2')
+
+# Declare outputs 
+# < add your code here >
+
+o = pyrtl.Output(bitwidth=1, name='o')
+
+
+# Describe your 5:1 MUX implementation
+# < add your code here >
+
+
+temp1 = 
+
+# Simulate and test your design for 16 cycles using random inputs
+# < add your code here >
