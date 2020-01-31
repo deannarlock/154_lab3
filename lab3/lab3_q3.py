@@ -19,8 +19,6 @@ e = pyrtl.Input(bitwidth=1, name='e')
 # < add your code here >
 
 s = pyrtl.Input(bitwidth=3, name='s')
-#s1 = pyrtl.Input(bitwidth=1, name='s1')
-#s2 = pyrtl.Input(bitwidth=1, name='s2')
 
 # Declare outputs 
 # < add your code here >
