@@ -9,11 +9,11 @@ import pyrtl
 # Declare data inputs
 # < add your code here >
 
-a = pyrtl.Input(bitwidth=1, name='a')
-b = pyrtl.Input(bitwidth=1, name='b')
-c = pyrtl.Input(bitwidth=1, name='c')
-d = pyrtl.Input(bitwidth=1, name='d')
-e = pyrtl.Input(bitwidth=1, name='e')
+a = pyrtl.Input(bitwidth=3, name='a')
+b = pyrtl.Input(bitwidth=3, name='b')
+c = pyrtl.Input(bitwidth=3, name='c')
+d = pyrtl.Input(bitwidth=3, name='d')
+e = pyrtl.Input(bitwidth=3, name='e')
 
 # Declare control inputs
 # < add your code here >
@@ -23,7 +23,7 @@ s = pyrtl.Input(bitwidth=3, name='s')
 # Declare outputs 
 # < add your code here >
 
-o = pyrtl.Output(bitwidth=1, name='o')
+o = pyrtl.Output(bitwidth=3, name='o')
 
 
 # Describe your 5:1 MUX implementation
@@ -33,13 +33,21 @@ sel0 = s[2]
 sel1 = s[1]
 sel2 = s[0]
 
-temp1 = ((~sel0) & (~sel1) & (~sel2)) & a
-temp2 = ((~sel0) & (~sel1) & (sel2)) & b
-temp3 = ((~sel0) & (sel1) & (~sel2)) & c
-temp4 = ((~sel0) & (sel1) & (sel2)) & d
-temp5 = ((sel0) & (~sel1) & (~sel2)) & e
 
-o <<= temp1 | temp2 | temp3 | temp4 | temp5
+with pyrtl.conditional_assignment:
+    with ((~sel0) & (~sel1) & (~sel2)):
+        o |= a
+    with ((~sel0) & (~sel1) & (sel2)):
+        o |= b
+    with ((~sel0) & (sel1) & (~sel2)):
+        o |= c
+    with ((~sel0) & (sel1) & (sel2)):
+        o |= d
+    with ((sel0) & (~sel1) & (~sel2)):
+        o |= e
+
+
+#o <<= temp1 | temp2 | temp3 | temp4 | temp5
 
 # Simulate and test your design for 16 cycles using random inputs
 # < add your code here >
@@ -51,11 +59,11 @@ sim = pyrtl.Simulation(tracer=sim_trace)
 import random
 for cycle in range(16):
     sim.step({
-        'a': random.choice([0,1]),
-        'b': random.choice([0,1]),
-        'c': random.choice([0,1]),
-        'd': random.choice([0,1]),
-        'e': random.choice([0,1]),
+        'a': random.choice([0,1,2,3,4,5,6,7]),
+        'b': random.choice([0,1,2,3,4,5,6,7]),
+        'c': random.choice([0,1,2,3,4,5,6,7]),
+        'd': random.choice([0,1,2,3,4,5,6,7]),
+        'e': random.choice([0,1,2,3,4,5,6,7]),
         's': random.choice([0,1,2,3,4])
         })
 
