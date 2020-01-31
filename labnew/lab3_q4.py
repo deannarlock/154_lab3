@@ -32,6 +32,18 @@ def alu (a, b, op):
         else if op == 1: return a xnor b
         else if op == 2" return a + b
     """
+
+    #o0 = op[0]
+    #o1 = op[1]
+    
+    #with pytrl.conditional_assignment:
+        #with ((~o0) & ~(o1)):
+            #alu_r <<= (a & b)
+        #with ((o0) & (~o1)):
+            #alu_r <<= (~(a ^ b))
+        #with ((
+
+
     # Operation 0: a and b
     op0 = (~op[0] & ~op[1] & (a & b)) # < add your code here >
     # Operation 1: a xnor b
@@ -42,7 +54,7 @@ def alu (a, b, op):
     alu_r = pyrtl.WireVector(bitwidth=1)
     alu_cout = pyrtl.WireVector(bitwidth=1)
     # < add your code here >
-    alu_r <<= op0 | op1 | op2_s
+    alu_r <<= op0 | op1 | ((~op[0] & op[1]) & op2_s)
     alu_cout <<= op2_c & (op[1]) & (~op[0])
     
     return alu_r, alu_cout
